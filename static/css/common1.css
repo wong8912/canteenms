@@ -1,0 +1,140 @@
+
+/*初始化代码*/
+a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas,caption,center, cite,code, dd, del, details, dfn, div, dl, dt, em,embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p,pre, q, ruby, s, samp, section,small, span, strike, strong,sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video{
+    margin:0;
+    padding:0;
+    border:0;
+    /* font: inherit; */
+    vertical-align:baseline;
+    /*word-break:break-all;*/
+    word-wrap:break-word;
+    font-style: normal;
+}
+input{
+    white-space:nowrap;
+    margin:0;
+    padding:0;
+}
+input:-webkit-autofill {
+    -webkit-box-shadow:0 0 0px 1000px #fff inset;
+}
+*{
+    background-repeat:no-repeat;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+}
+ul,li,ol{
+    list-style:none;
+}
+img{
+    border:none;
+    -webkit-tap-highlight-color:rgba(0,0,0,0);
+    display: block;
+}
+html, body{
+    width:100%;
+    height:100%;
+    background-color: #edf2f2;
+}
+
+a{
+    text-decoration:none;
+    border:none;
+    outline:none;
+    tap-highlight-color: rgba(0,0,0,0);
+    focus-ring-color: rgba(0,0,0,0);
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+    -webkit-focus-ring-color: rgba(0,0,0,0);
+    -moz-tap-highlight-color: rgba(0,0,0,0);
+    -moz-focus-ring-color: rgba(0,0,0,0);
+}
+a:visited{
+    color: inherit;
+}
+input,button{
+    outline:none;
+    border:none;
+    font-weight:normal;
+}
+
+/*常用样式*/
+*{
+    font-family:"微软雅黑";
+    font-size: 16px;
+}
+
+.clear:after{
+    content: " ";
+    display: block;
+    clear: both;
+    height: 0;
+}
+/******修改placeholder颜色********/
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: #999; 
+}
+
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: #999;
+}
+
+input:-ms-input-placeholder,
+textarea:-ms-input-placeholder {
+    color: #999;
+}
+
+input::-webkit-input-placeholder,
+textarea::-webkit-input-placeholder {
+    color: #999;
+
+}
+/*头部样式*/
+.shell_header{
+    width: 100%;
+    min-width: 1200px;
+    height: 120px;
+    background-color: #5eb6c1;
+}
+.shell_header h5{
+    font-size: 18px;
+    color: #fff;
+    font-weight: bold;
+    text-align: center;
+    padding-top: 30px;
+}
+.user_menu{
+    position: absolute;
+    top: 24px;
+    right: 24px;
+}
+
+.nav_menu{
+    text-align: center;
+    font-size: 0;
+    margin:23px auto 0 auto;
+}
+.nav_menu li{
+    display: inline-block;
+    margin:0 48px;
+    cursor: pointer;
+    padding-bottom: 16px;
+    border-bottom:2px solid #5eb6c1;
+}
+.nav_menu li a{
+    display: block;
+    font-size: 16px;
+    color: #d9edf0;
+    font-weight: bold;
+}
+.nav_menu li.active{
+    border-bottom: 2px solid #fff;
+}
+.nav_menu li:hover{
+    border-bottom: 2px solid #fff;
+}
+
+.shell_content{
+    width: 100%;
+    min-width: 1200px;
+    background-color: #edf2f2;
+    padding:16px 0;
+}
