@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>主页Homepage</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        .c_3{
+            text-align: center;
+        }
+        #search_text{
+            margin: 0 auto;
+            border: 1px solid;
+            outline: none;
+            margin: 10px;
+        }
+    </style>
+</head>
+<body>
+	<!--banner-->
+	<div class="banner">
+		<img src="/static/img/banner.jpg">
+	</div>
+	<!--banner end-->
+	<!--nav-->
+	<div class="nav">
+		<ul class="nav_ul clear">
+			<li>
+				<a href="index.html">主页Home</a>
+			</li>
+			<li>
+				<a href="menu.html">菜单Menu</a>
+			</li>
+			<li>
+				<a class="active" href="information.html">信息Information</a>
+			</li>
+			<li>
+				<a href="contact.html">反馈Feedback</a>
+			</li>
+		</ul>
+	</div>
+	<!--nav end-->
+	<!--content-->
+	<div class="content">
+		<!--Information-->
+		<div class="c_3">
+			<h6 class="c_3_title">所有菜单</h6>
+            <div>
+                <input type="text" id="search_text" placeholder="搜索菜名">
+                <button id="search_btn">搜索Search</button>
+            </div>
+			<ul class="c_3_ul">
+				<li class="clear">
+					<p>菜名</p>
+					<span>菜系</span>
+					<i>特色描述</i>
+				</li>
+                {% for i in data %}
+                    <li>
+                        <div class="clear">
+                        <p>{{ i.menuname }}</p>
+                        <span>{{ i.cuisine_field }}</span>
+                        <i>{{ i.introduce_field }}</i>
+                        </div>
+                    </li>
+                {% endfor %}
+
+			</ul>
+		</div>
+		<!--Information end-->
+	</div>
+	<!--content end-->
+</body>
+</html>
+<script src="/static/js/jquery.js"></script>
+<script>
+    $('#search_btn').click(function () {
+       console.log($('#search_text').val());
+        var text = $('#search_text').val();
+        if(text == ''){
+            window.location.reload();
+        }else {
+            $.ajax({
+				url:'/search_menu',
+				type:'POST',
+				data:{
+					data: text
+				},
+				dataType:'json',
+				success:function(res){
+				    console.log(res);
+                    $('.clear').nextAll().remove();
+                    for(var i=0;i<res.data.length;i++){
+                        $('.c_3_ul').append("<li><div class='clear'><p>"+ res.data[i].menuname +"</p><span>"+ res.data[i].cuisine_field +"</span><i>"+  res.data[i].introduce_field +"</i></div></li>");
+                    }
+				}
+			})
+        }
+    });
+</script>

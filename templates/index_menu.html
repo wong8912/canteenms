@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>后台Backend</title>
+	<link rel="stylesheet" href="/static/css/common1.css">
+</head>
+<style type="text/css">
+	.content2{
+		width: 1200px;
+		margin: 0 auto;
+		padding: 30px 0 100px 0;
+		    border-radius: 4px;
+    background-color: #fff;
+	}
+	.content2_banner{
+		width: 800px;
+		height: 400px;
+		background: url(/static/img/up_img.jpg) no-repeat center;
+        background-size: 200px 200px;
+        background-position: 300px 100px;
+        margin: 0 auto;
+        position: relative;
+        overflow: hidden;
+	}
+	#up_img{
+		width: 800px;
+		height: 400px;
+		opacity: 0;
+		position: absolute;
+		top: 0;
+		left: 0;
+	}
+	#images{
+		display: block;
+		width: 100%;
+		max-height: 400px;
+	}
+	.btn_up{
+		width: 240px;
+	    height: 40px;
+	    border-radius: 4px;
+	    color: #fff;
+	    font-size: 14px;
+	    line-height: 40px;
+	    text-align: center;
+	    margin: 0 auto;
+	    margin-top: 40px;
+	    background-color: #5eb6c1;
+	    cursor: pointer;
+	}
+</style>
+<body>
+    <!--头部-->
+	<div class="shell_header">
+	    <div class="user_menu">
+	        <div class="um_img"></div>
+	    </div>
+		<h5>ABC饭堂</h5>
+		<ul class="nav_menu clear">
+			<li>
+				<a href="index1.html">添加食品Add dishes</a>
+		    </li>
+		    <li class="active">
+				<a href="index_menu.html">上传早餐Upload breakfast</a>
+		    </li>
+		    <li>
+				<a href="index_wj.html">问卷结果Survey result</a>
+		    </li>
+		    <li>
+				<a href="index_fk.html">反馈结果Feedback result</a>
+		    </li>
+            <li>
+				<a href="menu_result.html">菜单选择结果Menu result</a>
+		    </li>
+		</ul>
+	</div>
+	<!--修改banner图-->
+	<div class="shell_content">
+		<div class="content2">
+            <form method="POST" action="index_menu.html" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="content2_banner">
+                    <input onchange="selectFileImage(this);" type="file" id="up_img" name="photo">
+                    <img id="images" src="">
+                </div>
+{#                <div class="btn_up">Confirm</div>#}
+                <button style="display: block;" class="btn_up" type="submit">Confirm</button>
+            </form>
+
+		</div>
+	</div>
+</body>
+</html>
+{{ s|safe }}
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript" src="/static/js/test.js"></script>
+<script type="text/javascript" src="/static/js/exif.js"></script>
+<script type="text/javascript">
+
+</script>

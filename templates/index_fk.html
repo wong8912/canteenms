@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>后台管理</title>
+	<link rel="stylesheet" href="/static/css/common1.css">
+</head>
+<style type="text/css">
+	.content4{
+		width: 1200px;
+		margin: 0 auto;
+		padding: 30px 0 100px 0;
+		    border-radius: 4px;
+    background-color: #fff;
+    min-height: 500px;
+	}
+    .c_3_ul{
+    width: 700px;
+    margin: 0 auto;
+    border:1px solid #333;
+    border-bottom: none;
+    margin-left: 250px;
+}
+.c_3_ul li{
+    width: 100%;
+    border-bottom: 1px solid #333;
+    min-height: 40px;
+    position: relative;
+}
+.c_3_ul li:before{
+    display: block;
+    content: "";
+    width: 0;
+    height: 100%;
+    border-right: 1px solid #333;
+    position: absolute;
+    top: 0;
+    left: 301px;
+}
+.c_3_ul li:after{
+    display: block;
+    content: "";
+    width: 0;
+    height: 100%;
+    border-right: 1px solid #333;
+    position: absolute;
+    top: 0;
+    left: 501px;
+}
+.c_3_ul li p,.c_3_ul li span,.c_3_ul li i,.c_3_ul li b{
+    display: block;
+}
+.c_3_ul li:nth-child(1) p,.c_3_ul li:nth-child(1) span,.c_3_ul li:nth-child(1) i,.c_3_ul li:nth-child(1) b{
+    display: block;
+    font-size: 16px;
+    font-weight: 700;
+    text-align: center;
+    line-height: 40px;
+}
+.c_3_ul li p,.c_3_ul li span,.c_3_ul li b{
+    width: 200px;
+    font-size: 16px;
+    color: #333;
+    line-height: 40px;
+    text-align: center;
+    float: left;
+    height: 100%;
+    position: relative;
+    font-weight: 400;
+}
+.c_3_ul li b:after{
+    display: block;
+    content: "";
+    width: 0;
+    height: 100%;
+    border-right: 1px solid #333;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.c_3_ul li p{
+    width: 300px;
+}
+.c_3_ul li span{
+    width: 200px;
+}
+.c_3_ul li i{
+    width: 200px;
+    font-size: 14px;
+    color: #333;
+    line-height: 40px;
+    float: left;
+    position: relative;
+    text-align: center;
+}
+.content4 h6{
+    font-size: 16px;
+    color: #333;
+    line-height: 40px;
+    text-align: center;
+}
+.c_3_ul_1{
+    width: 900px;
+    margin-left: 200px;
+}
+</style>
+<body>
+    <!--头部-->
+	<div class="shell_header">
+	    <div class="user_menu">
+	        <div class="um_img"></div>
+	    </div>
+		<h5>ABC 饭堂</h5>
+		<ul class="nav_menu clear">
+			<li>
+				<a href="index1.html">添加菜单Add dishes</a>
+		    </li>
+		    <li>
+				<a href="index_menu.html">上传早餐Upload breakfast</a>
+		    </li>
+		    <li>
+				<a href="index_wj.html">问卷结果Survey result</a>
+		    </li>
+		    <li class="active">
+				<a href="index_fk.html">反馈结果Feedback result</a>
+		    </li>
+            <li>
+				<a href="menu_result.html">菜单选择结果Menu result</a>
+		    </li>
+		</ul>
+	</div>
+	<!--修改banner图-->
+	<div class="shell_content">
+		<div class="content4" id="content4">
+            <div class="table_1">
+            <h6>用户喜欢度（今日）</h6>
+            <ul class="c_3_ul">
+                <li class="clear">
+                    <p>菜名</p>
+                    <span>好吃</span>
+                    <i>有待改进</i>
+                </li>
+                {% for i in data %}
+                   <li>
+                       <div class="clear">
+                        <p>{{ i.name }}</p>
+                        <span>{{ i.haochi_amount }}</span>
+                        <i>{{ i.youdai_amount }}</i>
+                        </div>
+                   </li>
+                {% endfor %}
+            </ul>
+            </div>
+		</div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="js/jquery.js"></script>
+<script type="text/javascript">
+
+</script>

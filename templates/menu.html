@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>菜单Menu</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+	<!--banner-->
+	<div class="banner">
+		<img src="/static/img/banner.jpg">
+	</div>
+	<!--banner end-->
+	<!--nav-->
+	<div class="nav">
+		<ul class="nav_ul clear">
+			<li>
+				<a href="index.html">主页Home</a>
+			</li>
+			<li>
+				<a class="active" href="menu.html">菜单Menu</a>
+			</li>
+			<li>
+				<a href="information.html">信息Information</a>
+			</li>
+			<li>
+				<a href="contact.html">反馈Feedback</a>
+			</li>
+		</ul>
+	</div>
+	<!--nav end-->
+	<!--content-->
+	<div class="content">
+		<!--menu-->
+		<div class="c_2 clear">
+			<div class="c_2_left clear">
+				<h5 class="c_2_title">可选菜单</h5>
+				<div class="c2_l_left">
+					<h6>凉菜</h6>
+					<ul class="c_2_ul clear" id="c_2_ul">
+                        {% for i in data %}
+                           <li>
+                                <img src="/static/img/food1.jpg">
+                                <p>{{ i.menuname }}</p>
+                            </li>
+                        {% endfor %}
+
+					</ul>
+				</div>
+				<div class="c2_l_right">
+					<p>汤、粥、糖水等</p>
+					<p>主食</p>
+					<p>水果</p>
+				</div>
+			</div>
+			<div class="c_2_right clear">
+				<h5 class="c_2_title">已选菜单Selected Menu</h5>
+				<div id="c_2_list">
+					<span>Please select foods</span>
+				<ul class="c_2_ul clear" style="display: none;" id="c_2_ul_one">
+						
+					</ul>
+				</div>
+					<div class="btn_box clear" style="display: none;">
+						<div class="btn_sure">确定菜单Confirm menu</div>
+						<div class="btn_qx">取消菜单Cancel menu</div>
+					</div>
+                    <div class="chongzhi" style="display: none;cursor: pointer">
+						<div class="btn_re">重置reset</div>
+					</div>
+                <div>
+                    <a style="display: block;font-size: 16px;line-height: 36px;color: #2e6da4;text-align: center;" href="questionnaire.html">问卷调查Questionnaire</a>
+                </div>
+
+			</div>
+		</div>
+		<!--menu end-->
+	</div>
+	<!--content end-->
+</body>
+</html>
+<script src="/static/js/jquery.js"></script>
+<script>
+	$(function(){
+        var selected=false; //判断是否选择菜单
+        $.ajax({
+            url:'/check_selectedmenu',
+            type:'POST',
+            dataType:'json',
+            data:{
+                login_user: getCookie('user')
+            },
+            success:function(res){
+                console.log(res);
+                if(res.data){
+                    selected = true;
+                    console.log(res.data.split(','));
+                    sel_menus = res.data.split(',');
+                    var list = '';
+                    for(var i=0;i<sel_menus.length; i++){
+                        var li = '<li><img src="/static/img/food1.jpg"><p>'+sel_menus[i]+'</p></li>';
+                        list += li;
+                        $("#c_2_ul_one").html(list);
+                        $("#c_2_ul_one").show();
+                        $(".btn_box").hide();
+                        $("#c_2_list").find("span").hide();
+                    }
+                    $('.chongzhi').show();
+                }
+            }
+        });
+		//点击选菜
+		var list = '';
+		var index = -1;
+		$("#c_2_ul").on("click","li",function(){
+            if(selected){
+                alert('不可更改重新提交菜单！');
+                return
+            }
+			var _this = $(this);
+			if(_this.hasClass("clik")){
+				return false;
+			}
+			var length = $("#c_2_ul").find("li.clik").length;
+			if(length>=8){
+				alert("最多只能选择八道菜");
+				return false;
+			}
+			_this.addClass("clik");
+			var img_url = _this.find("img").attr("src");
+			var title = _this.find("p").text();
+			var li = '<li><img src='+img_url+'><p>'+title+'</p></li>';
+			list += li;
+			$("#c_2_ul_one").html(list);
+			$("#c_2_ul_one").show();
+			$(".btn_box").show();
+			$("#c_2_list").find("span").hide();
+		})
+		//取消菜单
+		$(".btn_qx").on("click",function(){
+			$("#c_2_ul_one").html('');
+			$("#c_2_ul_one").hide();
+			$(".btn_box").hide();
+			$("#c_2_list").find("span").show();
+			$("#c_2_ul").find("li").removeClass("clik");
+			list = '';
+		});
+        function getCookie(cookie_name) {
+            var allcookies = document.cookie;
+            //索引长度，开始索引的位置
+            var cookie_pos = allcookies.indexOf(cookie_name);
+
+            // 如果找到了索引，就代表cookie存在,否则不存在
+            if (cookie_pos != -1) {
+                // 把cookie_pos放在值的开始，只要给值加1即可
+                //计算取cookie值得开始索引，加的1为“=”
+                cookie_pos = cookie_pos + cookie_name.length + 1;
+                //计算取cookie值得结束索引
+                var cookie_end = allcookies.indexOf(";", cookie_pos);
+
+                if (cookie_end == -1) {
+                    cookie_end = allcookies.length;
+
+                }
+                //得到想要的cookie的值
+                var value = unescape(allcookies.substring(cookie_pos, cookie_end));
+            }
+            return value;
+        }
+		//确定菜单
+		$(".btn_sure").on("click",function(){
+			var length = $("#c_2_ul_one").find("li").length;
+            console.log(getCookie('user'));
+            var login_user = getCookie('user');
+            if(!login_user){
+                alert('请登录！');
+                window.location='/login';
+                return
+            }
+			if(length < 2){
+				alert("至少选择两个");
+				return false;
+			}
+			var names ='';
+			for(var i=0;i<length;i++){
+				var name = $("#c_2_ul_one").find("li").eq(i).find("p").text();
+				names += name+',';
+			}
+			names = names.substring(0,names.length-1);
+			$.ajax({
+				url:'/save_selected_menu',
+				type:'POST',
+				dataType:'json',
+				data:{
+					names:names,
+                    login_user:login_user
+				},
+				success:function(res){
+                    if(res.success == 1){
+                        $(".btn_box").hide();
+                        $('.chongzhi').show();
+                        alert('提交成功!')
+                    }else {
+                        alert('提交失败!')
+                    }
+                    console.log(res);
+				}
+			})
+		});
+        //重置菜单
+        $('.chongzhi').click(function () {
+            $.ajax({
+				url:'/chongzhicaidan',
+				type:'POST',
+				dataType:'json',
+				data:{
+                    login_user:getCookie('user')
+				},
+				success:function(res){
+                   console.log(res);
+                    if(res.success){
+                        window.location.reload();
+                    }
+				}
+			})
+        });
+	})
+</script>

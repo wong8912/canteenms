@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>User Feedback</title>
+	<link rel="stylesheet" type="text/css" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+	<!--banner-->
+	<div class="banner">
+		<img src="/static/img/banner.jpg">
+	</div>
+	<!--banner end-->
+	<!--nav-->
+	<div class="nav">
+		<ul class="nav_ul clear">
+			<li>
+				<a href="index.html">主页Home</a>
+			</li>
+			<li>
+				<a href="menu.html">菜单Menu</a>
+			</li>
+			<li>
+				<a href="information.html">信息Information</a>
+			</li>
+			<li>
+				<a class="active" href="contact.html">反馈Feedback</a>
+			</li>
+		</ul>
+	</div>
+	<!--nav end-->
+	<!--content-->
+	<div class="content">
+		<!--contact-->
+		<div class="c_5">
+			<h5>User's Feedback</h5>
+			<div class="c_5_li clear">
+				<p>今天的</p>
+				<select id="one">
+				  <option value="">请选择菜名</option>
+
+				</select>
+				<p>好吃，但今天的</p>
+				<select id="two">
+				  <option value="">请选择菜名</option>
+
+				</select>
+				<p>有待改进</p>
+			</div>
+			<div class="c_5_btn">Submit</div>
+		</div>
+	</div>
+	<!--content end-->
+</body>
+</html>
+<script src="/static/js/jquery.js"></script>
+<script>
+	$(function(){
+         var selected=false; //判断是否选择菜单
+        $.ajax({
+            url:'/check_selectedmenu',
+            type:'POST',
+            dataType:'json',
+            data:{
+                login_user: getCookie('user')
+            },
+            success:function(res){
+                console.log(res);
+                if(res.data) {
+                    selected = true;
+                    var menu = res.data.split(',');
+                    console.log(menu);
+                    for (var i=0;i<menu.length;i++){
+                        $('#one').append("<option value="+ menu[i] +">"+ menu[i] +"</option>");
+                        $('#two').append("<option value="+ menu[i] +">"+ menu[i] +"</option>");
+                    }
+                }else {
+                    $('.c_5_btn').html('请先点菜!');
+                }
+            }
+        });
+
+	    var val_1 ='';
+	    var val_2 ='';
+	    var val_3 ='';
+	    var val_4 ='';
+	    var datas ='';
+		//点击提交反馈
+		$(".c_5_btn").on("click",function(){
+            if(!selected){
+                window.location='/index/menu.html';
+                return;
+            }
+		    val_1 = $("#one").val();
+		    val_2 = $("#two").val();
+		     if(val_1 =='' || val_2 == ''){
+		        alert("Please choose the food name");
+		        return false;
+            }
+            if(val_1 == val_2){
+                alert("两个选项不能一样");
+		        return false;
+            }
+		    datas = val_1 +','+val_2;
+		    $.ajax({
+				url:'/index/contact.html',
+				type:'POST',
+				data:{
+					datas:datas,
+                    user: getCookie('user')
+				},
+				dataType:'json',
+				success:function(){
+				    alert("Success！")
+				}
+			})
+		})
+        function getCookie(cookie_name) {
+            var allcookies = document.cookie;
+            //索引长度，开始索引的位置
+            var cookie_pos = allcookies.indexOf(cookie_name);
+
+            // 如果找到了索引，就代表cookie存在,否则不存在
+            if (cookie_pos != -1) {
+                // 把cookie_pos放在值的开始，只要给值加1即可
+                //计算取cookie值得开始索引，加的1为“=”
+                cookie_pos = cookie_pos + cookie_name.length + 1;
+                //计算取cookie值得结束索引
+                var cookie_end = allcookies.indexOf(";", cookie_pos);
+
+                if (cookie_end == -1) {
+                    cookie_end = allcookies.length;
+
+                }
+                //得到想要的cookie的值
+                var value = unescape(allcookies.substring(cookie_pos, cookie_end));
+            }
+            return value;
+        }
+	})
+</script>

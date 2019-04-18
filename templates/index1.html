@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Backend</title>
+	<link rel="stylesheet" href="/static/css/common1.css">
+</head>
+<style type="text/css">
+	.content1{
+		width: 1320px;
+		margin: 0 auto;
+		padding: 30px 0 100px 0;
+		    border-radius: 4px;
+    background-color: #fff;
+	}
+	.content1_big{
+		width: 100%;
+		height: 100%;
+		background-color: rgba(0,0,0,0.5);
+		position: fixed;
+		top: 0;
+		left: 0;
+		z-index: 999;
+	}
+	.content1_box{
+		padding: 30px;
+		background-color: #fff;
+		border-radius: 6px;
+		position: absolute;
+		top: 50%;
+		margin-top: -200px;
+		left: 50%;
+		margin-left: -300px;
+	}
+	.content1_li{
+		margin-bottom: 20px;
+	}
+	.content1_li p{
+		width: 80px;
+	    font-size: 14px;
+	    color: #303333;
+	    float: left;
+	    line-height: 40px;
+	    text-align: center;
+	}
+	.content1_li input{
+		width: 240px;
+	    height: 40px;
+	    border-radius: 4px;
+	    background-color: #ebf2fa;
+	    color: #303333;
+	    float: left;
+	    margin-left: 14px;
+	    font-size: 14px;
+	    text-indent: 16px;
+	}
+	textarea{
+		width: 408px;
+	    height: 120px;
+	    border-radius: 4px;
+	    background-color: #ebf2fa;
+	    color: #303333;
+	    float: left;
+	    margin-left: 14px;
+	    font-size: 14px;
+	    padding: 8px 16px;
+	    resize:none;
+	    outline:none;
+	}
+	.btn_add{
+		width: 240px;
+	    height: 40px;
+	    border-radius: 4px;
+	    color: #fff;
+	    font-size: 14px;
+	    line-height: 40px;
+	    text-align: center;
+	    margin: 0 auto;
+	    margin-top: 40px;
+	    background-color: #5eb6c1;
+	    cursor: pointer;
+	}
+	.btn_add1{
+		width: 240px;
+	    height: 40px;
+	    border-radius: 4px;
+	    color: #fff;
+	    font-size: 14px;
+	    line-height: 40px;
+	    text-align: center;
+	    margin: 0 auto;
+	    margin-top: 40px;
+	    background-color: #5eb6c1;
+	    cursor: pointer;
+	    margin-bottom: 30px;
+	}
+	.btn_close{
+		font-size: 16px;
+		color: #333;
+		width: 40px;
+		line-height: 40px;
+		text-align: center;
+		position: absolute;
+		top: 0;
+		right: 0;
+		cursor: pointer;
+	}
+	.c_3_ul{
+	width: 1200px;
+	margin: 0 auto;
+	border:1px solid #333;
+	border-bottom: none;
+}
+.c_3_ul li{
+	width: 100%;
+	border-bottom: 1px solid #333;
+	min-height: 40px;
+	position: relative;
+}
+.c_3_ul li:before{
+	display: block;
+	content: "";
+	width: 0;
+	height: 100%;
+	border-right: 1px solid #333;
+	position: absolute;
+	top: 0;
+	left: 201px;
+}
+.c_3_ul li:after{
+	display: block;
+	content: "";
+	width: 0;
+	height: 100%;
+	border-right: 1px solid #333;
+	position: absolute;
+	top: 0;
+	left: 301px;
+}
+.c_3_ul li p,.c_3_ul li span,.c_3_ul li i{
+	display: block;
+}
+.c_3_ul li:nth-child(1) p,.c_3_ul li:nth-child(1) span,.c_3_ul li:nth-child(1) i,.c_3_ul li:nth-child(1) h6{
+	display: block;
+	font-size: 16px;
+	font-weight: 700;
+	text-align: center;
+	line-height: 40px;
+}
+.c_3_ul li p,.c_3_ul li span{
+	width: 200px;
+	font-size: 16px;
+	color: #333;
+	line-height: 40px;
+	text-align: center;
+	float: left;
+	height: 100%;
+}
+.c_3_ul li:not(:first-child) h6{
+	width: 80px;
+	font-size: 16px;
+	line-height: 40px;
+	color: blue;
+	text-decoration:underline;
+	text-align: center;
+	float: left;
+	height: 100%;
+	cursor: pointer;
+}
+.c_3_ul li span{
+	width: 100px;
+}
+.c_3_ul li i{
+	width: 800px;
+	font-size: 14px;
+	color: #333;
+	line-height: 24px;
+	padding: 8px 10px;
+	float: left;
+	position: relative;
+}
+.c_3_ul li i:after{
+	display: block;
+	content: "";
+	width: 0;
+	height: 100%;
+	border-right: 1px solid #333;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+</style>
+<body>
+    <!--头部-->
+	<div class="shell_header">
+	    <div class="user_menu">
+	        <div class="um_img"></div>
+	    </div>
+		<h5>ABC饭堂 </h5>
+		<ul class="nav_menu clear">
+			<li class="active">
+				<a href="#">添加食品Add dishes</a>
+		    </li>
+		    <li>
+				<a href="index_menu.html">上传早餐Upload breakfast</a>
+		    </li>
+		    <li>
+				<a href="index_wj.html">问卷结果Survey result</a>
+		    </li>
+		    <li>
+				<a href="index_fk.html">反馈结果Feedback result</a>
+		    </li>
+            <li>
+				<a href="menu_result.html">菜单选择结果Order result</a>
+		    </li>
+		</ul>
+	</div>
+	<!--添加菜品-->
+	<div class="shell_content">
+		<div class="content1">
+			<div class="btn_add1">添加菜品Add dishes</div>
+			<ul class="c_3_ul">
+				<li class="clear">
+					<p>菜名</p>
+					<span>菜系</span>
+					<i>特色描述</i>
+					<h6>操作</h6>
+				</li>
+                {% for i in data %}
+                    <li>
+                        <div class="clear">
+                        <p>{{ i.menuname }}</p>
+                        <span>{{ i.cuisine_field }}</span>
+                        <i>{{ i.introduce_field }}</i>
+                        <h6 class="btn_sc">Delete</h6>
+                        </div>
+                    </li>
+                {% endfor %}
+
+			</ul>
+		</div>
+	</div>
+	<div class="content1_big" style="display: none;">
+		<div class="content1_box">
+			<div class="btn_close">X</div>
+			<div class="content1_li clear">
+				<p>菜名   Dish name：</p>
+				<input id="name" placeholder="请输入菜名" type="text" name="">
+			</div>
+			<div class="content1_li clear">
+				<p>菜系Cuisine：</p>
+				<input id="cuisine" placeholder="请输入菜系" type="text" name="">
+			</div>
+			<div class="content1_li clear">
+				<p>特色描述Detail：</p>
+				<textarea id="describe" placeholder="请输入特色描述"></textarea>
+			</div>
+			<div class="btn_add">确认Submit</div>
+	    </div>
+	</div>
+</body>
+</html>
+<script type="text/javascript" src="/static/js/jquery.js"></script>
+<script type="text/javascript">
+	$(function(){
+		//关闭弹窗
+		$(".btn_close").on("click",function(){
+			$(".content1_big").hide();
+		});
+		//新增菜单
+		$(".btn_add1").on("click",function(){
+			$(".content1_big").show();
+		});
+		//删除
+		$("body").on("click",".btn_sc",function(){
+			var menu_name = $(this).parent().find("p").text();
+			$.ajax({
+				url:'index1.html',
+				type:'POST',
+				dataType:'json',
+				data:{
+					menu_name:menu_name
+				},
+				success:function(res){
+					alert("Deleted success！")
+					window.location.reload();
+				}
+			})
+		});
+		//确定添加菜品
+		$(".btn_add").on("click",function(){
+			var name = $("#name").val();
+			var cuisine = $("#cuisine").val();
+			var describe = $("#describe").val();
+			if(name.length ==0){
+				alert("请输入菜名");
+				return false;
+			}
+			if(cuisine.length ==0){
+				alert("请输入菜系");
+				return false;
+			}
+			if(describe.length ==0){
+				alert("请输入描述");
+				return false;
+			}
+			$.ajax({
+				url:'index1.html',
+				type:'POST',
+				dataType:'json',
+				data:{
+					name:name,
+					cuisine:cuisine,
+					describe:describe
+				},
+				success:function(res){
+					alert("Added success！")
+					window.location.reload();
+				}
+			})
+		})
+	})
+</script>
